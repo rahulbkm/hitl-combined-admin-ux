@@ -1,0 +1,299 @@
+/* Rule Card Styles */
+.rule-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s;
+}
+
+.rule-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rule-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.rule-card-header-content {
+  flex: 1;
+}
+
+.rule-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.rule-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #242424;
+  margin: 0;
+}
+
+.out-of-box-tag {
+  background: #e8f3ff;
+  color: #0078d4;
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.rule-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.rule-type-badge {
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.rule-type-badge.quality {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.rule-type-badge.compliance {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.rule-type-badge.adherence {
+  background: #f3e5f5;
+  color: #6a1b9a;
+}
+
+.rule-actions-count {
+  font-size: 13px;
+  color: #605e5c;
+}
+
+.rule-card-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rule-card-body {
+  padding: 16px 20px;
+}
+
+.rule-description {
+  font-size: 14px;
+  color: #605e5c;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.rule-card-footer {
+  padding: 12px 20px;
+  background: #f9f9f9;
+  border-top: 1px solid #f0f0f0;
+}
+
+.mcs-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #e8f3ff;
+  color: #0078d4;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Action Card Styles */
+.action-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s;
+}
+
+.action-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.action-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.action-card-header-content {
+  flex: 1;
+}
+
+.action-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.action-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #242424;
+  margin: 0;
+}
+
+.action-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.action-type-badge {
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.action-type-badge.notification {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.action-type-badge.coaching {
+  background: #f3e5f5;
+  color: #6a1b9a;
+}
+
+.action-type-badge.escalation {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.severity-badge {
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.severity-badge.critical {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.severity-badge.warning {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.severity-badge.normal {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.action-rules-count {
+  font-size: 13px;
+  color: #605e5c;
+}
+
+.action-card-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.action-card-body {
+  padding: 16px 20px;
+}
+
+.action-detail {
+  font-size: 14px;
+  color: #605e5c;
+  margin: 0 0 8px 0;
+  line-height: 1.5;
+}
+
+.action-detail:last-child {
+  margin-bottom: 0;
+}
+
+/* Shared Button Styles */
+.delete-button {
+  background: transparent;
+  border: none;
+  color: #a4262c;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.delete-button:hover {
+  background: #fde7e9;
+}
+
+.edit-button {
+  background: white;
+  border: 1px solid #d1d1d1;
+  color: #242424;
+  cursor: pointer;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.edit-button:hover {
+  background: #f3f2f1;
+  border-color: #b3b3b3;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  width: 40px;
+  height: 20px;
+  background: #d1d1d1;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s;
+  padding: 0;
+}
+
+.toggle-switch.checked {
+  background: #0078d4;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.toggle-switch.checked .toggle-thumb {
+  transform: translateX(20px);
+}

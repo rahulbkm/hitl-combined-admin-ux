@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realtime conversation quality - Dynamics 365 Customer Service</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f2f1;
+            color: #323130;
+        }
+
+        /* Header */
+        .suite-header {
+            height: 48px;
+            background-color: #1f1f1f;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            color: white;
+        }
+
+        .suite-header-title {
+            font-size: 14px;
+            margin-left: 16px;
+        }
+
+        .suite-header-search {
+            flex: 1;
+            max-width: 500px;
+            margin-left: 40px;
+        }
+
+        .suite-header-search input {
+            width: 100%;
+            padding: 6px 12px;
+            border: 1px solid #605e5c;
+            background-color: #292827;
+            color: white;
+            border-radius: 2px;
+        }
+
+        .suite-header-icons {
+            margin-left: auto;
+            display: flex;
+            gap: 16px;
+        }
+
+        /* Layout */
+        .main-container {
+            display: flex;
+            height: calc(100vh - 48px);
+        }
+
+        /* Side Navigation */
+        .side-nav {
+            width: 228px;
+            background-color: #faf9f8;
+            border-right: 1px solid #edebe9;
+            overflow-y: auto;
+        }
+
+        .side-nav-header {
+            height: 44px;
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 14px;
+            border-bottom: 1px solid #edebe9;
+        }
+
+        .side-nav-item {
+            height: 36px;
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+
+        .side-nav-item:hover {
+            background-color: #f3f2f1;
+        }
+
+        .side-nav-item.active {
+            background-color: #edebe9;
+            border-left-color: #0078d4;
+            font-weight: 600;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        /* Command Bar */
+        .command-bar {
+            height: 44px;
+            background-color: white;
+            border-bottom: 1px solid #edebe9;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            gap: 4px;
+        }
+
+        .command-button {
+            height: 32px;
+            padding: 0 12px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-radius: 2px;
+        }
+
+        .command-button:hover {
+            background-color: #f3f2f1;
+        }
+
+        .command-button.primary {
+            background-color: #0078d4;
+            color: white;
+        }
+
+        .command-button.primary:hover {
+            background-color: #106ebe;
+        }
+
+        /* Page Content */
+        .page-content {
+            padding: 24px;
+            background-color: white;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            font-size: 12px;
+            color: #605e5c;
+            margin-bottom: 8px;
+        }
+
+        .breadcrumb a {
+            color: #0078d4;
+            text-decoration: none;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .page-title-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .tag {
+            padding: 2px 8px;
+            background-color: #8764b8;
+            color: white;
+            font-size: 12px;
+            border-radius: 2px;
+        }
+
+        .info-message {
+            display: flex;
+            gap: 8px;
+            padding: 12px;
+            background-color: #f3f2f1;
+            border-left: 3px solid #0078d4;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .info-icon {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 2px solid #edebe9;
+            margin: 32px 0 24px 0;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            font-size: 14px;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .tab.active {
+            border-bottom-color: #0078d4;
+            color: #0078d4;
+            font-weight: 600;
+        }
+
+        .tab:hover {
+            background-color: #f3f2f1;
+        }
+
+        /* Section */
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .section-description {
+            font-size: 14px;
+            color: #605e5c;
+            margin-bottom: 32px;
+        }
+
+        /* Card */
+        .card {
+            border: 1px solid #edebe9;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            padding: 16px;
+            background-color: #faf9f8;
+            border-bottom: 1px solid #edebe9;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .card-header-content h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .card-header-content p {
+            font-size: 12px;
+            color: #605e5c;
+            line-height: 1.4;
+        }
+
+        .toggle-switch {
+            width: 44px;
+            height: 24px;
+            background-color: #0078d4;
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background-color: white;
+            border-radius: 50%;
+            top: 3px;
+            right: 3px;
+            transition: transform 0.2s;
+        }
+
+        .toggle-switch.off {
+            background-color: #a19f9d;
+        }
+
+        .toggle-switch.off::after {
+            transform: translateX(-20px);
+        }
+
+        .card-section {
+            padding: 16px;
+        }
+
+        .card-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .criteria-list {
+            list-style: none;
+        }
+
+        .criteria-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #edebe9;
+            font-size: 14px;
+        }
+
+        .criteria-item:last-child {
+            border-bottom: none;
+        }
+
+        .criteria-item:hover {
+            background-color: #f3f2f1;
+        }
+
+        /* Table */
+        .table-container {
+            border: 1px solid #edebe9;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: #faf9f8;
+            border-bottom: 1px solid #edebe9;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-button {
+            padding: 8px 16px;
+            border: 1px solid #8a8886;
+            background-color: white;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-button:hover {
+            background-color: #f3f2f1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: #faf9f8;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #323130;
+            border-bottom: 1px solid #edebe9;
+        }
+
+        td {
+            padding: 12px 16px;
+            font-size: 14px;
+            border-bottom: 1px solid #edebe9;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background-color: #f3f2f1;
+        }
+
+        .status-toggle {
+            display: flex;
+            align-items: center;
+        }
+
+        .link {
+            color: #0078d4;
+            text-decoration: none;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Suite Header -->
+    <div class="suite-header">
+        <div class="suite-header-title">Dynamics 365 | Customer Service admin center</div>
+        <div class="suite-header-search">
+            <input type="text" placeholder="Search">
+        </div>
+        <div class="suite-header-icons">
+            <!-- Icons would go here -->
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <nav class="side-nav">
+            <div class="side-nav-header">Get started</div>
+            <div class="side-nav-item">Home</div>
+            <div class="side-nav-item">Search admin settings</div>
+            <div class="side-nav-item">Guided channel setups</div>
+
+            <div class="side-nav-header" style="margin-top: 16px;">Customer Support</div>
+            <div class="side-nav-item">Overview</div>
+            <div class="side-nav-item">User management</div>
+            <div class="side-nav-item">Bots</div>
+            <div class="side-nav-item">Channels</div>
+            <div class="side-nav-item">Queues</div>
+            <div class="side-nav-item">Routing</div>
+            <div class="side-nav-item">Workstreams</div>
+            <div class="side-nav-item">Case settings</div>
+            <div class="side-nav-item">Customer settings</div>
+            <div class="side-nav-item active">Quality management</div>
+            <div class="side-nav-item">Realtime quality</div>
+
+            <div class="side-nav-header" style="margin-top: 16px;">Agent experience</div>
+            <div class="side-nav-item">Overview</div>
+            <div class="side-nav-item">Workspaces</div>
+            <div class="side-nav-item">Productivity</div>
+            <div class="side-nav-item">Knowledge</div>
+            <div class="side-nav-item">Collaboration</div>
+
+            <div class="side-nav-header" style="margin-top: 16px;">Operations</div>
+            <div class="side-nav-item">Overview</div>
+            <div class="side-nav-item">Insights</div>
+            <div class="side-nav-item">Calendar</div>
+            <div class="side-nav-item">Service scheduling</div>
+            <div class="side-nav-item">Miscellaneous</div>
+        </nav>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Command Bar -->
+            <div class="command-bar">
+                <button class="command-button primary">+ New quality evaluation criteria</button>
+                <button class="command-button">+ New compliance check</button>
+                <button class="command-button">Export</button>
+                <button class="command-button">Refresh</button>
+            </div>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="#">Customer Support</a> &gt; Realtime quality
+                </div>
+
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="page-title-row">
+                        <h1 class="page-title">Realtime conversation quality</h1>
+                        <span class="tag">AI Copilot</span>
+                    </div>
+
+                    <div class="info-message">
+                        <svg class="info-icon" viewBox="0 0 16 16" fill="#0078d4">
+                            <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 12.9c-3.3 0-5.9-2.7-5.9-5.9S4.7 2.1 8 2.1s5.9 2.7 5.9 5.9-2.6 5.9-5.9 5.9z"/>
+                            <path d="M8 4.5c-.4 0-.8.3-.8.8s.3.8.8.8.8-.3.8-.8-.4-.8-.8-.8zM8 7c-.4 0-.8.3-.8.8V11c0 .4.3.8.8.8s.8-.3.8-.8V7.8c0-.5-.4-.8-.8-.8z"/>
+                        </svg>
+                        <div>
+                            <p>This feature is currently supported in a limited number of languages. See the <a href="#" class="link">full list of supported languages</a>. Copilot responses in unsupported languages have not been tested for language accuracy. Make sure AI-generated content is accurate and appropriate before using it. <a href="#" class="link">Read terms</a>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab active">Conversation Quality</button>
+                    <button class="tab">Adherence</button>
+                    <button class="tab">Predicted CSAT</button>
+                </div>
+
+                <!-- Quality Evaluation Section -->
+                <h2 class="section-title">Quality evaluation</h2>
+                <p class="section-description">Manage the criteria for quality evaluation against which conversations will be evaluated, and their corresponding conditions</p>
+
+                <!-- Conversation Effectiveness Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-header-content">
+                            <h3>Conversation effectiveness</h3>
+                            <p>Comprehensive evaluation criteria focused on customer service quality, response efficiency, and satisfaction metrics</p>
+                        </div>
+                        <div class="toggle-switch"></div>
+                    </div>
+                    <div class="card-section">
+                        <div class="table-header">
+                            <h4 class="card-section-title">Section</h4>
+                            <div class="action-buttons">
+                                <button class="action-button">+ Add section</button>
+                                <button class="action-button">+ Add conditions</button>
+                            </div>
+                        </div>
+                        <ul class="criteria-list">
+                            <li class="criteria-item">Resolution effectiveness</li>
+                            <li class="criteria-item">Empathy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Conversation Flow Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-header-content">
+                            <h3>Conversation flow & other criteria</h3>
+                            <p>Evaluation criteria focused on agent adherence to processes, escalation patterns, and effective use of knowledge resources</p>
+                        </div>
+                        <div class="toggle-switch"></div>
+                    </div>
+                    <div class="card-section">
+                        <div class="table-header">
+                            <h4 class="card-section-title">Section</h4>
+                            <div class="action-buttons">
+                                <button class="action-button">+ Add section</button>
+                                <button class="action-button">+ Add conditions</button>
+                            </div>
+                        </div>
+                        <ul class="criteria-list">
+                            <li class="criteria-item">Communication effectiveness</li>
+                            <li class="criteria-item">Accountable</li>
+                            <li class="criteria-item">Resourceful</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Compliance Section -->
+                <h2 class="section-title" style="margin-top: 48px;">Compliance and guardrails</h2>
+                <p class="section-description">Manage the compliance checks and guardrails for your organization, against which conversations will be evaluated in real-time</p>
+
+                <!-- Compliance Table -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <h4 class="card-section-title">All compliance rules</h4>
+                        <div class="action-buttons">
+                            <button class="action-button">+ Add conditions</button>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Compliance Name</th>
+                                <th>Compliance Description</th>
+                                <th>Status</th>
+                                <th>Conditions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Competitor check</td>
+                                <td>Monitors conversations for competitor mentions and ensures appropriate handling</td>
+                                <td><div class="status-toggle"><div class="toggle-switch"></div></div></td>
+                                <td><a href="#" class="link">Workstream, Queue, LOB</a></td>
+                            </tr>
+                            <tr>
+                                <td>Financial advice</td>
+                                <td>Ensures compliance with financial regulations when providing advice or recommendations</td>
+                                <td><div class="status-toggle"><div class="toggle-switch"></div></div></td>
+                                <td><a href="#" class="link">Workstream, Queue, LOB</a></td>
+                            </tr>
+                            <tr>
+                                <td>Harmful content</td>
+                                <td>Detects and prevents distribution of harmful or inappropriate content</td>
+                                <td><div class="status-toggle"><div class="toggle-switch"></div></div></td>
+                                <td><a href="#" class="link">Workstream, Queue, LOB</a></td>
+                            </tr>
+                            <tr>
+                                <td>Language check</td>
+                                <td>Validates appropriate language use and tone in customer communications</td>
+                                <td><div class="status-toggle"><div class="toggle-switch"></div></div></td>
+                                <td><a href="#" class="link">Workstream, Queue, LOB</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

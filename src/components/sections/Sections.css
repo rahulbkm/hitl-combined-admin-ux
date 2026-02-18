@@ -1,0 +1,274 @@
+/* Section View Layout */
+.section-view {
+  padding: 24px 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.section-header-content {
+  flex: 1;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #242424;
+  margin: 0 0 8px 0;
+}
+
+.section-description {
+  font-size: 14px;
+  color: #605e5c;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #0078d4;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-button:hover {
+  background: #106ebe;
+}
+
+/* Filter Bar */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.filter-button {
+  background: white;
+  border: 1px solid #d1d1d1;
+  color: #242424;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-button:hover {
+  background: #f3f2f1;
+  border-color: #b3b3b3;
+}
+
+.filter-button.active {
+  background: #0078d4;
+  color: white;
+  border-color: #0078d4;
+}
+
+/* Section Content */
+.section-content {
+  /* Content area for cards */
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: #fafafa;
+  border: 1px dashed #d1d1d1;
+  border-radius: 4px;
+}
+
+.empty-state p {
+  font-size: 16px;
+  color: #605e5c;
+  margin: 0 0 20px 0;
+}
+
+/* Targeting Conditions Styles */
+.targeting-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  padding: 20px;
+}
+
+.targeting-card-header {
+  margin-bottom: 16px;
+}
+
+.targeting-card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.targeting-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #242424;
+  margin: 0;
+}
+
+.targeting-card-body {
+  /* Body content */
+}
+
+.targeting-section-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #242424;
+  margin: 0 0 12px 0;
+}
+
+.no-conditions-text {
+  font-size: 14px;
+  color: #605e5c;
+  margin: 0 0 12px 0;
+  font-style: italic;
+}
+
+.conditions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.condition-item {
+  padding: 8px 12px;
+  background: #f9f9f9;
+  border-left: 3px solid #0078d4;
+  margin-bottom: 8px;
+  border-radius: 2px;
+}
+
+.condition-text {
+  font-size: 14px;
+  color: #242424;
+}
+
+.add-condition-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 1px solid #d1d1d1;
+  color: #242424;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-condition-button:hover {
+  background: #f3f2f1;
+  border-color: #b3b3b3;
+}
+
+/* Monitoring Insights Styles */
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.insight-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.insight-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #f3f2f1;
+  border-radius: 50%;
+  color: #0078d4;
+}
+
+.insight-content {
+  flex: 1;
+}
+
+.insight-value {
+  font-size: 32px;
+  font-weight: 600;
+  color: #242424;
+  margin: 0 0 4px 0;
+  line-height: 1;
+}
+
+.insight-label {
+  font-size: 14px;
+  color: #605e5c;
+  margin: 0;
+}
+
+.placeholder-section {
+  background: #fafafa;
+  border: 1px dashed #d1d1d1;
+  border-radius: 4px;
+  padding: 40px;
+}
+
+.placeholder-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.placeholder-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #242424;
+  margin: 0 0 12px 0;
+}
+
+.placeholder-text {
+  font-size: 14px;
+  color: #605e5c;
+  margin: 0 0 16px 0;
+}
+
+.placeholder-list {
+  text-align: left;
+  font-size: 14px;
+  color: #605e5c;
+  margin: 0 0 16px 0;
+  padding-left: 24px;
+}
+
+.placeholder-list li {
+  margin-bottom: 8px;
+}
+
+.placeholder-note {
+  font-size: 13px;
+  color: #8a8886;
+  margin: 0;
+  font-style: italic;
+}
