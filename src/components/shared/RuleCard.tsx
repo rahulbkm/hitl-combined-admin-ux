@@ -57,14 +57,9 @@ export const RuleCard: React.FC<RuleCardProps> = ({ rule, onToggle, onEdit, onDe
           <button className="edit-button" onClick={onEdit}>
             Edit
           </button>
-          <button
-            className={`toggle-switch ${rule.enabled ? 'checked' : ''}`}
-            onClick={onToggle}
-            role="switch"
-            aria-checked={rule.enabled}
-          >
-            <span className="toggle-thumb" />
-          </button>
+          <span className={`enabled-badge ${rule.enabled ? 'enabled' : 'disabled'}`}>
+            {rule.enabled ? 'Enabled' : 'Disabled'}
+          </span>
         </div>
       </div>
 

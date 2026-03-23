@@ -71,14 +71,9 @@ export const ActionCard: React.FC<ActionCardProps> = ({ action, onToggle, onEdit
           <button className="edit-button" onClick={onEdit}>
             Edit
           </button>
-          <button
-            className={`toggle-switch ${action.enabled ? 'checked' : ''}`}
-            onClick={onToggle}
-            role="switch"
-            aria-checked={action.enabled}
-          >
-            <span className="toggle-thumb" />
-          </button>
+          <span className={`enabled-badge ${action.enabled ? 'enabled' : 'disabled'}`}>
+            {action.enabled ? 'Enabled' : 'Disabled'}
+          </span>
         </div>
       </div>
 

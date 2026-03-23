@@ -266,34 +266,21 @@
   border-color: #b3b3b3;
 }
 
-/* Toggle Switch */
-.toggle-switch {
-  width: 40px;
-  height: 20px;
-  background: #d1d1d1;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  position: relative;
-  transition: background-color 0.2s;
-  padding: 0;
+/* Enabled/Disabled Badge */
+.enabled-badge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
 }
 
-.toggle-switch.checked {
-  background: #0078d4;
+.enabled-badge.enabled {
+  background: #dff6dd;
+  color: #107c10;
 }
 
-.toggle-thumb {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 16px;
-  height: 16px;
-  background: white;
-  border-radius: 50%;
-  transition: transform 0.2s;
-}
-
-.toggle-switch.checked .toggle-thumb {
-  transform: translateX(20px);
+.enabled-badge.disabled {
+  background: #f3f2f1;
+  color: #797775;
 }
