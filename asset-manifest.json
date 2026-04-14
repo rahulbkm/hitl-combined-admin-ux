@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/hitl-combined-admin-ux/static/css/main.7b8505d9.css",
-    "main.js": "/hitl-combined-admin-ux/static/js/main.60f0dde9.js",
+    "main.css": "/hitl-combined-admin-ux/static/css/main.4b5b346d.css",
+    "main.js": "/hitl-combined-admin-ux/static/js/main.8fb0ee60.js",
     "index.html": "/hitl-combined-admin-ux/index.html",
-    "main.7b8505d9.css.map": "/hitl-combined-admin-ux/static/css/main.7b8505d9.css.map",
-    "main.60f0dde9.js.map": "/hitl-combined-admin-ux/static/js/main.60f0dde9.js.map"
+    "main.4b5b346d.css.map": "/hitl-combined-admin-ux/static/css/main.4b5b346d.css.map",
+    "main.8fb0ee60.js.map": "/hitl-combined-admin-ux/static/js/main.8fb0ee60.js.map"
   },
   "entrypoints": [
-    "static/css/main.7b8505d9.css",
-    "static/js/main.60f0dde9.js"
+    "static/css/main.4b5b346d.css",
+    "static/js/main.8fb0ee60.js"
   ]
 }
